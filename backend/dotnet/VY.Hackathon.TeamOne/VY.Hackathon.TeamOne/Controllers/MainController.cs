@@ -17,12 +17,12 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("simple/{handlingArea}/{date}")]
-        public async Task<IActionResult> GetSimple(string handlingArea, DateTime date)
+        [Route("simple")]
+        public async Task<IActionResult> GetSimple([FromQuery] IEnumerable<string> parameters)
         {
             try
             {
-                var result = await _providerDataService.GetDataFromADayAndAnArea(handlingArea, date);
+                var result = await _providerDataService.GetDataFromProvider(parameters);
                 if (result.Errors?.Any() ?? default)
                     return Ok(result.Result);
                 return BadRequest();

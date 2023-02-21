@@ -15,21 +15,21 @@ public class ProviderDataService : IProviderDataService
         _httpClient = httpClient;
     }
 
-    public async Task<OperationResult<ProviderDataResponse>> GetDataFromADayAndAnArea(string handlingArea, DateTime date)
+    public async Task<OperationResult<ProviderDataResponse>> GetDataFromProvider(IEnumerable<string> parameters)
     {
         try
         {
-            var response = await _httpClient.GetAsync("/simple");
+            var pathUrl = $"/main?parameters={string.Join(",", parameters)}";
+            var response = await _httpClient.GetAsync(pathUrl);
             response.EnsureSuccessStatusCode();
             var responseModel = await response.Content.ReadFromJsonAsync<ProviderDataResponse>() ?? default;
             if (responseModel != null)
-                return OperationResultHelper.GenerateOperationResult<ProviderDataResponse>(responseModel);
-            throw new ArgumentNullException(paramName: nameof(ProviderDataResponse), message:"Data received by provider is null");
+                return OperationResultHelper.GenerateOperationResult(responseModel);
+            throw new ArgumentException("Data received by provider is null");
         }
         catch (Exception ex)
         {
             return OperationResultHelper.GenerateOperationResultWithError<ProviderDataResponse>(ex);
         }
-
     }
 }
