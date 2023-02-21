@@ -39,7 +39,7 @@ export function Form (){
     <section className="search container-standard">
       <form className="form">
         <label className={"control-label"} htmlFor={"full_time_wage_jardinera"}>
-          {"full_time_wage_jardinera"}
+          {"Full time wage jardinera"}
           <input
             className={"control-select"}
             type={"number"}
@@ -47,11 +47,11 @@ export function Form (){
             name={"full_time_wage_jardinera"}
             onChange={(event) => setFullJardinera(event.target.value)}
             value={fullJardinera}
-            placeholder={"full_time_wage_jardinera"}
+            placeholder={"Full time wage jardinera"}
           />
         </label>
         <label className={"control-label"} htmlFor={"part_time_wage_jardinera"}>
-          {"part_time_wage_jardinera"}
+          {"Part time wage jardinera"}
           <input
             className={"control-select"}
             type={"number"}
@@ -59,12 +59,12 @@ export function Form (){
             name={"part_time_wage_jardinera"}
             onChange={(event) => setPartJardinera(event.target.value)}
             value={partJardinera}
-            placeholder={"part_time_wage_jardinera"}
+            placeholder={"Part time wage jardinera"}
           />
         </label>
 
         <label className={"control-label"} htmlFor={"full_time_wage_equipaje"}>
-          {"full_time_wage_equipaje"}
+          {"Full time wage equipaje"}
           <input
             className={"control-select"}
             type={"number"}
@@ -72,11 +72,11 @@ export function Form (){
             name={"full_time_wage_equipaje"}
             onChange={(event) => setFullEquipaje(event.target.value)}
             value={fullEquipaje}
-            placeholder={"full_time_wage_equipaje"}
+            placeholder={"Full time wage equipaje"}
           />
         </label>
         <label className={"control-label"} htmlFor={"part_time_wage_equipaje"}>
-          {"part_time_wage_equipaje"}
+          {"Part time wage equipaje"}
           <input
             className={"control-select"}
             type={"number"}
@@ -84,11 +84,11 @@ export function Form (){
             name={"part_time_wage_equipaje"}
             onChange={(event) => setPartEquipaje(event.target.value)}
             value={partEquipaje}
-            placeholder={"part_time_wage_equipaje"}
+            placeholder={"Part time wage equipaje"}
           />
         </label>
         <label className={"control-label"} htmlFor={"full_time_wage_coordinacion"}>
-          {"full_time_wage_coordinacion"}
+          {"Full time wage coordinacion"}
           <input
             className={"control-select"}
             type={"number"}
@@ -96,11 +96,11 @@ export function Form (){
             name={"full_time_wage_coordinacion"}
             onChange={(event) => setFullCoordinacion(event.target.value)}
             value={fullCoordinacion}
-            placeholder={"full_time_wage_coordinacion"}
+            placeholder={"Full time wage coordinacion"}
           />
         </label>
         <label className={"control-label"} htmlFor={"part_time_wage_coordinacion"}>
-          {"part_time_wage_coordinacion"}
+          {"Part time wage coordinacion"}
           <input
             className={"control-select"}
             type={"number"}
@@ -108,11 +108,11 @@ export function Form (){
             name={"part_time_wage_coordinacion"}
             onChange={(event) => setPartCoordinacion(event.target.value)}
             value={partCoordinacion}
-            placeholder={"part_time_wage_coordinacion"}
+            placeholder={"Part time wage coordinacion"}
           />
         </label>
         <label className={"control-label"} htmlFor={"day"}>
-          {"day"}
+          {"Day"}
           <input
             className={"control-select"}
             type={"date"}
@@ -120,7 +120,7 @@ export function Form (){
             name={"day"}
             onChange={(event) => setDay(event.target.value)}
             value={day}
-            placeholder={"day"}
+            placeholder={"Day"}
           />
         </label>
         <button
