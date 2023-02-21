@@ -21,7 +21,9 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
-
+    volumes:
+      - sqlserver:/var/opt/mssql
+      
   react:
     build: ../frontend/Vueling/.
     ports:
@@ -29,5 +31,7 @@ services:
     depends_on:
       - python
       - dotnet
-    
+
+volumes:
+  sqlserver:
     
