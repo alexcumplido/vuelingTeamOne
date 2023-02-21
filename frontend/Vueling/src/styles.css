@@ -18,6 +18,8 @@
   font-weight: var(--fw-bold);
   text-align: center;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
   color: var(--clr-neutral-500);
 }
 
@@ -28,4 +30,9 @@
   border: none;
   border-radius: 0.25rem;
   box-shadow: 0 1px 3px rgba(77, 71, 81, 0.2);
+}
+
+.component-admin {
+  display: flex;
+  gap: 2rem;
 }
