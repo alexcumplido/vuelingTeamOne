@@ -17,8 +17,8 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("simple")]
-        public async Task<IActionResult> GetSimple([FromQuery] IEnumerable<string> parameters)
+        [Route("getData")]
+        public async Task<IActionResult> GetData([FromQuery] IEnumerable<string> parameters)
         {
             try
             {
