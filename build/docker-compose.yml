@@ -14,17 +14,15 @@ services:
     depends_on:
       - postgres
     
-  postgres:
-    image: postgres:latest
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - "5432:5432"
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Vueling1234"
+      ACCEPT_EULA: "Y"
     volumes:
-      - postgres:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - sqlserver:/var/opt/mssql
       
   react:
     build: ../frontend/Vueling/.
@@ -35,5 +33,5 @@ services:
       - dotnet
 
 volumes:
-  postgres:
+  sqlserver
     
