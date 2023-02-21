@@ -1,11 +1,29 @@
-from typing import List
+from typing import Any
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/getData/{parameters}")
-def read_data(parameters: List[str]):
-    return { 
+class AirportSchedule(BaseModel):
+    Open: str
+    Close: str
 
-     }
+class Time(BaseModel):
+    Jardineria: int
+    Equipaje: float
+    Coordination: int
+
+class HandlingFunctionHourPrice(BaseModel):
+    FullTime: Time
+    PartTime: Time
+
+class Request(BaseModel):
+    PartTimeShiftDuration: int
+    HandlingFunctionHourPrice: HandlingFunctionHourPrice
+    AirportSchedule: AirportSchedule
+
+
+@app.post("/getData")
+def read_data(request: Request):
+    return request
