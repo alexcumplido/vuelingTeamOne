@@ -11,8 +11,7 @@ public static class AuthConfiguration
 {
     public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(@"Server=postgres;Port=5432;Database=postgres;User Id=postgres;Password=postgres"));
+        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
 
         services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {

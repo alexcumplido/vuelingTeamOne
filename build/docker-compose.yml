@@ -12,7 +12,7 @@ services:
     ports:
       - "8001:80"
     depends_on:
-      - postgres
+      - sqlserver
     
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -33,5 +33,5 @@ services:
       - dotnet
 
 volumes:
-  sqlserver
+  sqlserver:
     
