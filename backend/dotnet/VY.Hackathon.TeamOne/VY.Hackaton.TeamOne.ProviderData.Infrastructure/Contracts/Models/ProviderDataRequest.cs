@@ -6,9 +6,9 @@
     );
 
     public record TimeData(
-        int Jardineria,
+        double Jardineria,
         double Equipaje,
-        int Coordination
+        double Coordination
     );
 
     public record HandlingFunctionHourPrice(
