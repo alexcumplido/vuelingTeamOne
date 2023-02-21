@@ -18,4 +18,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VY.Hackaton.TeamOne.ProviderData.Infrastructure\VY.Hackaton.TeamOne.ProviderData.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

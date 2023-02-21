@@ -1,6 +1,4 @@
-﻿using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts.Models;
-
-namespace VY.Hackaton.Entities
+﻿namespace VY.Hackaton.Entities
 {
     public static class OperationResultHelper
     {
