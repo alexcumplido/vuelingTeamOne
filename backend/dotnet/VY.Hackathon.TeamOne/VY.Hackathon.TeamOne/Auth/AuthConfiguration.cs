@@ -12,7 +12,7 @@ public static class AuthConfiguration
     public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(@"Server=postgres;Port=5432;Database=VYHackathonTeamOne;User Id=postgres;Password=postgres"));
+            options.UseNpgsql(@"Server=postgres;Port=5432;Database=postgres;User Id=postgres;Password=postgres"));
 
         services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
