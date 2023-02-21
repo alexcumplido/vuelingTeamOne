@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VY.Hackathon.TeamOne.Auth.Models
+namespace VY.Hackathon.TeamOne.Controllers.Auth.Models
 {
     public class SignUpInfo
     {
