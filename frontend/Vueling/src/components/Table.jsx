@@ -3,11 +3,13 @@ import "./table.css";
 import datatable from "../../output.json";
 import DownloadButton from "./DownloadButton";
 // import XLSX from "xlsx"; // Import XLSX library
+import FilterTable from "./FilterTable";
 
 export default function Table() {
   const [data, setData] = useState(datatable);
   const [sortKey, setSortKey] = useState(null);
   const [sortOrder, setSortOrder] = useState(1);
+  const [filterHeader, setFilterHeader] = useState("");
   const [filterText, setFilterText] = useState("");
 
   const headers = Object.keys(data);
@@ -30,21 +32,30 @@ export default function Table() {
     }
   };
 
+  const handleFilterHeader = (event) => {
+    setFilterHeader(event.target.value);
+  };
+
+  const handleFilterText = (event) => {
+    setFilterText(event.target.value);
+  };
+
+  const filteredRows = filterHeader
+    ? rows.filter((row) =>
+        row[filterHeader]
+          .toString()
+          .toLowerCase()
+          .includes(filterText.toLowerCase())
+      )
+    : rows;
+
   const sortedRows = sortKey
-    ? rows.sort(
+    ? filteredRows.sort(
         (a, b) =>
           sortOrder *
           (a[sortKey] > b[sortKey] ? 1 : a[sortKey] < b[sortKey] ? -1 : 0)
       )
-    : rows;
-  // data viene por props. Cada vez que cambia data poner un useEffect que setea la nueva data a la nueva data
-  const filteredRows = filterText
-    ? sortedRows.filter((row) =>
-        headers.some((header) =>
-          String(row[header]).toLowerCase().includes(filterText.toLowerCase())
-        )
-      )
-    : sortedRows;
+    : filteredRows;
   useEffect(() => {
     setData(data);
   }, [data]);
@@ -52,15 +63,34 @@ export default function Table() {
   return (
     <>
       <DownloadButton headers={headers} sortedRows={sortedRows} />
+
       <div>
-        <label htmlFor="filter">Filter:</label>
-        <input
-          type="text"
-          id="filter"
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
+        <FilterTable
+          filterHeader={filterHeader}
+          filterText={filterText}
+          handleFilterHeader={handleFilterHeader}
+          headers={headers}
+          handleFilterText={handleFilterText}
         />
+        {/* <label>
+          Filter:
+          <select value={filterHeader} onChange={handleFilterHeader}>
+            <option value="">Choose a header</option>
+            {headers.map((header) => (
+              <option key={header} value={header}>
+                {header}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            value={filterText}
+            onChange={handleFilterText}
+            placeholder="Filter text"
+          />
+        </label> */}
       </div>
+
       <table>
         <thead>
           <tr>
