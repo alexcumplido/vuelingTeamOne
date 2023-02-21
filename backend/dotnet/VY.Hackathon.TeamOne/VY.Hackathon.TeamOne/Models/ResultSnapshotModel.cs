@@ -8,7 +8,7 @@ namespace VY.Hackathon.TeamOne.WebApi.Models
 
         public DateTime SnapshotDateTime { get; set; } = DateTime.UtcNow;
 
-        public ParameterModel? Parameters { get; set; }
+        public ProviderDataRequest? Parameters { get; set; }
 
         public ProviderDataResponse[]? ResultInfo { get; set; }
     }

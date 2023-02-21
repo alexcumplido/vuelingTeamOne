@@ -1,23 +1,26 @@
-﻿namespace VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts.Models;
+﻿using System.Text.Json.Serialization;
 
-    public record AirportSchedule(
-        string Open,
-        string Close
-    );
+namespace VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts.Models;
 
-    public record TimeData(
-        double Jardineria,
-        double Equipaje,
-        double Coordination
-    );
+public class ProviderDataRequest
+{
+    [JsonPropertyName("full_time_wage_jardinera")]
+    public decimal FullTimeWageJardinera { get; set; }
 
-    public record HandlingFunctionHourPrice(
-        TimeData FullTime,
-        TimeData PartTime
-    );
+    [JsonPropertyName("part_time_wage_jardinera")]
+    public decimal PartTimeWageJardinera { get; set; }
 
-    public record ProviderDataRequest(
-        int PartTimeShiftDuration,
-        HandlingFunctionHourPrice HandlingFunctionHourPrice,
-        AirportSchedule AirportSchedule
-    );
+    [JsonPropertyName("full_time_wage_equipaje")]
+    public decimal FullTimeWageEquipaje { get; set; }
+
+    [JsonPropertyName("part_time_wage_equipaje")]
+    public decimal PartTimeWageEquipaje { get; set; }
+
+    [JsonPropertyName("full_time_wage_coordinacion")]
+    public decimal FullTimeWageCoordinacion { get; set; }
+
+    [JsonPropertyName("part_time_wage_coordinacion")]
+    public decimal PartTimeWageCoordinacion { get; set; }
+
+    public DateTime Day { get; set; }
+}

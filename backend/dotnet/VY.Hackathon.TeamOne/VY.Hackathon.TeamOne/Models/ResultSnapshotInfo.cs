@@ -4,7 +4,7 @@ namespace VY.Hackathon.TeamOne.WebApi.Models
 {
     public class ResultSnapshotInfo
     {
-        public ParameterModel Parameters { get; set; }
+        public ProviderDataRequest Parameters { get; set; }
 
         public ProviderDataResponse[] DataResponse { get; set; }
     }
