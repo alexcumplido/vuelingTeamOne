@@ -1,0 +1,31 @@
+.control-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-label {
+    --fs-100: 0.75rem;
+    --clr-neutral-500: hsl(186, 14%, 43%);
+    --fw-bold: 600;
+  font-size: var(--fs-100);
+  font-weight: var(--fw-bold);
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--clr-neutral-500);
+}
+
+.control-select {
+    --fs-100: 0.75rem;
+  font-size: var(--fs-100);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px rgba(77, 71, 81, 0.2);
+}
