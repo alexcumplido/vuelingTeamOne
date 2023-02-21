@@ -17,6 +17,7 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("simple/{handlingArea}/{date}")]
         public async Task<IActionResult> GetSimple(string handlingArea, DateTime date)
         {
             try
