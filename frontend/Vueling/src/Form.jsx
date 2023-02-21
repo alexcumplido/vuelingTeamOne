@@ -13,7 +13,7 @@ export function Form (){
   async function fetchData(){
     try{
         const response = await fetch('fetchData', {
-            method: 'put',
+            method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               "full_time_wage_jardinera": fullJardinera,

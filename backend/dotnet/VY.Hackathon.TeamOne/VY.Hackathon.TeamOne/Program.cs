@@ -10,6 +10,8 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    
+
     // Add services to the container.
     builder.Services.AddScoped<ApplicationDbContext>();
     builder.Services.AddScoped<ResultSnapshotRepository>();
@@ -42,6 +44,7 @@ try
 
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
     app.MapControllers();
 

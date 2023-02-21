@@ -26,7 +26,7 @@ export function Administrative (){
     async function loginUser(){
         try{
             const response = await fetch('http://localhost:8001/api/Auth/login', {
-                method: 'put',
+                method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                 "username": usernameLogin,
