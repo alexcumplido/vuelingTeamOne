@@ -1,4 +1,4 @@
-﻿namespace VY.Hackathon.TeamOne.Controllers.Auth.Models;
+﻿namespace VY.Hackathon.TeamOne.WebApi.Controllers.Auth.Models;
 
 public class LoginCredentials
 {

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using VY.Hackathon.TeamOne.DataProvider;
+using VY.Hackathon.TeamOne.WebApi.DataProvider;
 
-namespace VY.Hackathon.TeamOne.Auth;
+namespace VY.Hackathon.TeamOne.WebApi.Auth;
 
 public static class AuthConfiguration
 {

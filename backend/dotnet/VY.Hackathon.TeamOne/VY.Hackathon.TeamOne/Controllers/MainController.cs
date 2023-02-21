@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace VY.Hackathon.TeamOne.Controllers
+namespace VY.Hackathon.TeamOne.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,7 +13,7 @@ namespace VY.Hackathon.TeamOne.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSimple()
         {
-
+            return null;
         }
     }
 }

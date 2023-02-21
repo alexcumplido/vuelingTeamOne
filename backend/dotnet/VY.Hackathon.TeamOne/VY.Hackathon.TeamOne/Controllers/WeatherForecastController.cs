@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace VY.Hackathon.TeamOne.Controllers
+namespace VY.Hackathon.TeamOne.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

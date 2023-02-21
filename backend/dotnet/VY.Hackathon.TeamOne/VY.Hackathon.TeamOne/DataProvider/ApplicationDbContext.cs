@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace VY.Hackathon.TeamOne.DataProvider;
+namespace VY.Hackathon.TeamOne.WebApi.DataProvider;
 
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {

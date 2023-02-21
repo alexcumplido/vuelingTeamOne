@@ -1,4 +1,4 @@
-﻿namespace VY.Hackathon.TeamOne.Auth;
+﻿namespace VY.Hackathon.TeamOne.WebApi.Auth;
 
 public class JwtBearerTokenSettings
 {

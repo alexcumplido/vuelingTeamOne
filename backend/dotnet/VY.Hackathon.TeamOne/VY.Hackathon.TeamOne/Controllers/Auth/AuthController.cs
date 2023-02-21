@@ -6,10 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using VY.Hackathon.TeamOne.Auth;
-using VY.Hackathon.TeamOne.Controllers.Auth.Models;
+using VY.Hackathon.TeamOne.WebApi.Auth;
+using VY.Hackathon.TeamOne.WebApi.Controllers.Auth.Models;
 
-namespace VY.Hackathon.TeamOne.Controllers.Auth;
+namespace VY.Hackathon.TeamOne.WebApi.Controllers.Auth;
 
 [Route("api/[controller]")]
 [ApiController]

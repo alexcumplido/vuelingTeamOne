@@ -1,4 +1,4 @@
-namespace VY.Hackathon.TeamOne
+namespace VY.Hackathon.TeamOne.WebApi
 {
     public class WeatherForecast
     {

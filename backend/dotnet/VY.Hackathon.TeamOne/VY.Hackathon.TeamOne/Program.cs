@@ -1,4 +1,4 @@
-using VY.Hackathon.TeamOne.Auth;
+using VY.Hackathon.TeamOne.WebApi.Auth;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Impl;
 

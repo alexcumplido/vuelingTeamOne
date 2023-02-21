@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VY.Hackathon.TeamOne.DataProvider;
+using VY.Hackathon.TeamOne.WebApi.DataProvider;
 
 #nullable disable
 
