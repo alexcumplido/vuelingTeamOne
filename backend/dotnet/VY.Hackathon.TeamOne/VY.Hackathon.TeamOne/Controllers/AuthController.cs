@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using VY.Hackathon.TeamOne.WebApi.Auth;
@@ -111,6 +112,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("Login")]
+    [ProducesResponseType(typeof(LoginResponse),  200)]
     public async Task<IActionResult> Login([FromBody] LoginCredentials? credentials)
     {
         try
@@ -126,8 +128,8 @@ public class AuthController : ControllerBase
                 return new BadRequestObjectResult(new { Message = "Login failed" });
             }
 
-            var token = GenerateToken(identityUser);
-            return Ok(new { Token = token, Message = "Success" });
+            var token = await GenerateToken(identityUser);
+            return Ok(new LoginResponse{ Token = token, Message = "Success" });
         }
         catch (Exception e)
         {
@@ -148,7 +150,7 @@ public class AuthController : ControllerBase
         return null;
     }
 
-    private async Task<object> GenerateToken(IdentityUser identityUser)
+    private async Task<string> GenerateToken(IdentityUser identityUser)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtBearerTokenSettings.SecretKey);
