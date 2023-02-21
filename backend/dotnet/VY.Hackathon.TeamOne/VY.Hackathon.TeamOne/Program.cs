@@ -15,7 +15,7 @@ builder.Services.ConfigureAuth(builder.Configuration);
 
 builder.Services.AddHttpClient<IProviderDataService, ProviderDataService>(client =>
 {
-    client.BaseAddress = new Uri("");
+    client.BaseAddress = new Uri("https://localhost:3000");
 });
 
 var app = builder.Build();
