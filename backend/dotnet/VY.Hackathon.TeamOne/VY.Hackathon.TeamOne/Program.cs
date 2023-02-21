@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VY.Hackathon.TeamOne.WebApi.Auth;
+using VY.Hackathon.TeamOne.WebApi.DataProvider;
 using VY.Hackathon.TeamOne.WebApi.Logging;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Impl;
@@ -10,6 +12,8 @@ try
 
     // Add services to the container.
     builder.Host.UseLogzIoSerilog();
+
+    builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>().Database.Migrate();
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
