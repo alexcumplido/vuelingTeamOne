@@ -65,11 +65,11 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("Role/{role}")]
-    public async Task<IActionResult> Login(string role)
+    public async Task<IActionResult> CreateRole(string role)
     {
         if (string.IsNullOrWhiteSpace(role))
         {
-            return new BadRequestObjectResult(new { Message = "Login failed" });
+            return new BadRequestObjectResult(new { Message = "Role name required" });
         }
 
         if (!await _roleManager.RoleExistsAsync(role))
@@ -110,18 +110,27 @@ public class AuthController : ControllerBase
     }
 
 
-    private object GenerateToken(IdentityUser identityUser)
+    private async Task<object> GenerateToken(IdentityUser identityUser)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtBearerTokenSettings.SecretKey);
 
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, identityUser.UserName),
+            new(ClaimTypes.Email, identityUser.Email)
+        };
+
+        claims.AddRange(
+            (await _userManager
+                .GetRolesAsync(identityUser))
+            .Select(role => new Claim(ClaimTypes.Role, role)));
+
+        // Add roles as multiple claims
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                    new(ClaimTypes.Name, identityUser.UserName.ToString()),
-                    new(ClaimTypes.Email, identityUser.Email)
-            }),
+            Subject = new ClaimsIdentity(claims),
 
             Expires = DateTime.UtcNow.AddSeconds(_jwtBearerTokenSettings.ExpiryTimeInSeconds),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
