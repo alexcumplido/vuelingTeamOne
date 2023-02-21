@@ -11,7 +11,7 @@ public static class AuthConfiguration
 {
     public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+        services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("SqlConnection")));
 
         services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
