@@ -5,5 +5,5 @@ namespace VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
 
 public interface IProviderDataService
 {
-    Task<OperationResult<ProviderDataResponse>> GetDataFromProvider(IEnumerable<string> parameters);
+    Task<OperationResult<ProviderDataResponse>> GetDataFromProvider(ProviderDataRequest request);
 }

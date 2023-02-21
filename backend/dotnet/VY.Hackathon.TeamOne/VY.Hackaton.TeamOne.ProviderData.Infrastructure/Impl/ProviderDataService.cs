@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using VY.Hackaton.Entities;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts.Models;
@@ -15,12 +16,11 @@ public class ProviderDataService : IProviderDataService
         _httpClient = httpClient;
     }
 
-    public async Task<OperationResult<ProviderDataResponse>> GetDataFromProvider(IEnumerable<string> parameters)
+    public async Task<OperationResult<ProviderDataResponse>> GetDataFromProvider(ProviderDataRequest request)
     {
         try
         {
-            var pathUrl = $"/main?parameters={string.Join(",", parameters)}";
-            var response = await _httpClient.GetAsync(pathUrl);
+            var response = await _httpClient.PostAsync("/main", new StringContent(JsonSerializer.Serialize(request)));
             response.EnsureSuccessStatusCode();
             var responseModel = await response.Content.ReadFromJsonAsync<ProviderDataResponse>() ?? default;
             if (responseModel != null)

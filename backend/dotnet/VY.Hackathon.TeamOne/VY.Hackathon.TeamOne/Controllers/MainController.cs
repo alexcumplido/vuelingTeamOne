@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
+using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts.Models;
 
 namespace VY.Hackathon.TeamOne.WebApi.Controllers
 {
@@ -16,13 +17,13 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
             _providerDataService = providerDataService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("getData")]
-        public async Task<IActionResult> GetData([FromQuery] IEnumerable<string> parameters)
+        public async Task<IActionResult> GetData([FromBody] ProviderDataRequest request)
         {
             try
             {
-                var result = await _providerDataService.GetDataFromProvider(parameters);
+                var result = await _providerDataService.GetDataFromProvider(request);
                 if (result.Errors?.Any() ?? default)
                     return Ok(result.Result);
                 return BadRequest();
