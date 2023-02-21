@@ -20,9 +20,11 @@ try
 
     builder.Services.ConfigureAuth(builder.Configuration);
 
+    builder.Services.AddHttpClient();
+
     builder.Services.AddHttpClient<IProviderDataService, ProviderDataService>(client =>
     {
-        client.BaseAddress = new Uri("https://localhost:3000");
+        client.BaseAddress = new Uri("http://phyton:8000");
     });
 
     var app = builder.Build();

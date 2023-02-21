@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using VY.Hackaton.Entities;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
@@ -20,7 +21,8 @@ public class ProviderDataService : IProviderDataService
     {
         try
         {
-            var response = await _httpClient.PostAsync("/main", new StringContent(JsonSerializer.Serialize(request)));
+            HttpContent httpContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("/getData", httpContent);
             response.EnsureSuccessStatusCode();
             var responseModel = await response.Content.ReadFromJsonAsync<ProviderDataResponse>() ?? default;
             if (responseModel != null)
