@@ -5,25 +5,19 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class AirportSchedule(BaseModel):
-    Open: str
-    Close: str
 
-class Time(BaseModel):
-    Jardineria: int
-    Equipaje: float
-    Coordination: int
-
-class HandlingFunctionHourPrice(BaseModel):
-    FullTime: Time
-    PartTime: Time
-
-class Request(BaseModel):
-    PartTimeShiftDuration: int
-    HandlingFunctionHourPrice: HandlingFunctionHourPrice
-    AirportSchedule: AirportSchedule
+class Model(BaseModel):
+    full_time_wage_jardinera : float
+    part_time_wage_jardinera : float
+    full_time_wage_equipaje : float
+    part_time_wage_equipaje : float
+    full_time_wage_coordinacion : float
+    part_time_wage_coordinacion : float
+    day : str
 
 
 @app.post("/getData")
-def read_data(request: Request):
-    return request
+def read_data(model: Model):
+
+    
+    return {str(model)}
