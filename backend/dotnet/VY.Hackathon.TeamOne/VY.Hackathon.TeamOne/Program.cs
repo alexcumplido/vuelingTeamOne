@@ -13,8 +13,6 @@ try
     // Add services to the container.
     builder.Host.UseLogzIoSerilog();
 
-    builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>().Database.Migrate();
-
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -43,8 +41,6 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
-
-    builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>().Database.Migrate();
 
     app.Run();
 }
