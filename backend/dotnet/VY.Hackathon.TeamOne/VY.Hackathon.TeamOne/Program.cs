@@ -31,7 +31,7 @@ try
 
     builder.Services.AddHttpClient<IProviderDataService, ProviderDataService>(client =>
     {
-        client.BaseAddress = new Uri("http://phyton:8000");
+        client.BaseAddress = new Uri("http://localhost:8000/");
     });
 
     var app = builder.Build();

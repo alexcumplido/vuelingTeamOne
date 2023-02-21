@@ -17,21 +17,20 @@ public class ProviderDataService : IProviderDataService
         _httpClient = httpClient;
     }
 
-    public async Task<OperationResult<ProviderDataResponse[]>> GetDataFromProvider(ProviderDataRequest request)
+    public async Task<string> GetDataFromProvider(ProviderDataRequest request)
     {
         try
         {
             HttpContent httpContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("/getData", httpContent);
+            var response = await _httpClient.PostAsync("getData", httpContent);
             response.EnsureSuccessStatusCode();
-            var responseModel = await response.Content.ReadFromJsonAsync<ProviderDataResponse[]>() ?? default;
-            if (responseModel != null)
-                return OperationResultHelper.GenerateOperationResult(responseModel);
-            throw new ArgumentException("Data received by provider is null");
+            var json = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(json);
+            return json;
         }
         catch (Exception ex)
         {
-            return OperationResultHelper.GenerateOperationResultWithError<ProviderDataResponse[]>(ex);
+            return ex.StackTrace;
         }
     }
 }

@@ -2,6 +2,7 @@ from typing import Any
 
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 import pandas as pd
 import numpy as np
@@ -12,6 +13,13 @@ COLUMN_NAMES = ['Day','Hour','Required employees']
 COLUMN_NAMES_INPUT = ['Day','Hour','Handling function','Required employees']
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Model(BaseModel):

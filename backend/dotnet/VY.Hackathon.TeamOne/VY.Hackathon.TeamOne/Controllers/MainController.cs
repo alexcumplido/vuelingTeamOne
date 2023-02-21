@@ -27,32 +27,19 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
         [HttpPost]
         [Route("getData")]
         [Authorize(Roles = "Admin")]
-        [ProducesResponseType(typeof(ProviderDataResponse[]), 200)]
         public async Task<IActionResult> GetData([FromBody] ProviderDataRequest request)
         {
             try
             {
-                var current = await _resultSnapshotRepository.GetLatestAsync();
+                
+                var result = await _providerDataService.GetDataFromProvider(request);
 
-                if (current == null)
-                {
-                    OperationResult<ProviderDataResponse[]> result = await _providerDataService.GetDataFromProvider(request);
+                return Ok(result);
 
-                    if (result.Errors.Any())
-                    {
-                        return BadRequest();
-                    }
-
-                    await _resultSnapshotRepository.AddAsync(result.Result.ToEntities());
-
-                    return Ok(result.Result);
-                }
-
-                return Ok(OperationResultHelper.GenerateOperationResult(current.ToModel()));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex);
             }
         }
     }
