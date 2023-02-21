@@ -15,10 +15,10 @@ public class ResultSnapshotConfig : IEntityTypeConfiguration<ResultSnapshot>
 
         builder.Property(e => e.SnapshotDateTime)
             .IsRequired()
-            .HasColumnType("datetime");
+            .HasColumnType("date");
 
         builder.Property(e => e.SnapshotDataJson)
             .IsRequired()
-            .HasColumnType("varchar(MAX)");
+            .HasColumnType("text");
     }
 }
