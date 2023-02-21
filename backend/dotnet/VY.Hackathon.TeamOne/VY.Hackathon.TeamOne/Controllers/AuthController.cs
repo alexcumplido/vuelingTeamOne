@@ -19,49 +19,63 @@ public class AuthController : ControllerBase
     private readonly JwtBearerTokenSettings _jwtBearerTokenSettings;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly ILogger<AuthController> _logger;
 
     public AuthController(
         IOptions<JwtBearerTokenSettings> jwtTokenOptions,
         UserManager<IdentityUser> userManager,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager,
+        ILogger<AuthController> logger)
     {
         _jwtBearerTokenSettings = jwtTokenOptions.Value;
         _userManager = userManager;
         _roleManager = roleManager;
+        _logger = logger;
     }
 
     [HttpPost]
     [Route("SignUp")]
     public async Task<IActionResult> SignUp([FromBody] SignUpInfo? signUpInfo)
     {
-        if (!ModelState.IsValid || signUpInfo == null)
+        try
         {
-            return new BadRequestObjectResult(new { Message = "User Registration Failed" });
-        }
-
-        var identityUser = new IdentityUser { UserName = signUpInfo.UserName, Email = signUpInfo.Email };
-        var result = await _userManager.CreateAsync(identityUser, signUpInfo.Password);
-
-        if (!result.Succeeded)
-        {
-            var dictionary = new ModelStateDictionary();
-            foreach (IdentityError error in result.Errors)
+            if (!ModelState.IsValid || signUpInfo == null)
             {
-                dictionary.AddModelError(error.Code, error.Description);
+                _logger.LogWarning("User info provided is invalid");
+                return new BadRequestObjectResult(new { Message = "User Registration Failed" });
             }
 
-            return new BadRequestObjectResult(new { Message = "User Registration Failed", Errors = dictionary });
-        }
+            var identityUser = new IdentityUser { UserName = signUpInfo.UserName, Email = signUpInfo.Email };
+            var result = await _userManager.CreateAsync(identityUser, signUpInfo.Password);
 
-        foreach (var role in signUpInfo.Roles)
-        {
-            if (await _roleManager.RoleExistsAsync(role))
+            if (!result.Succeeded)
             {
-                IdentityResult roleResult = await _userManager.AddToRoleAsync(identityUser, role);
-            }
-        }
+                var dictionary = new ModelStateDictionary();
+                foreach (IdentityError error in result.Errors)
+                {
+                    dictionary.AddModelError(error.Code, error.Description);
+                }
 
-        return Ok(new { Message = "User Registration Successful" });
+                _logger.LogWarning("User info provided is invalid");
+
+                return new BadRequestObjectResult(new { Message = "User Registration Failed", Errors = dictionary });
+            }
+
+            foreach (var role in signUpInfo.Roles)
+            {
+                if (await _roleManager.RoleExistsAsync(role))
+                {
+                    await _userManager.AddToRoleAsync(identityUser, role);
+                }
+            }
+
+            return Ok(new { Message = "User Registration Successful" });
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Has been an error trying to SignUp user {user}", signUpInfo?.UserName);
+            throw;
+        }
     }
 
     [HttpPost]

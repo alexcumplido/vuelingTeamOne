@@ -52,7 +52,7 @@ public static class AuthConfiguration
                 {
                     ValidateIssuer = true,
                     ValidIssuer = jwtBearerTokenSettings.Issuer,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidAudience = jwtBearerTokenSettings.Audience,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
