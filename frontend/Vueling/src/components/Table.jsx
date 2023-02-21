@@ -18,8 +18,6 @@ export default function Table() {
     headers.forEach((header) => {
       row[header] = data[header][key];
     });
-    console.log("row", row);
-    console.log("headers", headers);
     return row;
   });
 
@@ -62,33 +60,17 @@ export default function Table() {
 
   return (
     <>
-      <DownloadButton headers={headers} sortedRows={sortedRows} />
-
-      <div>
-        <FilterTable
-          filterHeader={filterHeader}
-          filterText={filterText}
-          handleFilterHeader={handleFilterHeader}
-          headers={headers}
-          handleFilterText={handleFilterText}
-        />
-        {/* <label>
-          Filter:
-          <select value={filterHeader} onChange={handleFilterHeader}>
-            <option value="">Choose a header</option>
-            {headers.map((header) => (
-              <option key={header} value={header}>
-                {header}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            value={filterText}
-            onChange={handleFilterText}
-            placeholder="Filter text"
+      <div className="buttonFilterContainer">
+        <div>
+          <FilterTable
+            filterHeader={filterHeader}
+            filterText={filterText}
+            handleFilterHeader={handleFilterHeader}
+            headers={headers}
+            handleFilterText={handleFilterText}
           />
-        </label> */}
+        </div>
+        <DownloadButton headers={headers} sortedRows={sortedRows} />
       </div>
 
       <table>
