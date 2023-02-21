@@ -11,9 +11,9 @@
 }
 
 .control-label {
-    --fs-100: 0.75rem;
-    --clr-neutral-500: hsl(186, 14%, 43%);
-    --fw-bold: 600;
+  --fs-100: 0.75rem;
+  --clr-neutral-500: hsl(186, 14%, 43%);
+  --fw-bold: 600;
   font-size: var(--fs-100);
   font-weight: var(--fw-bold);
   text-align: center;
@@ -21,6 +21,10 @@
   display: flex;
   flex-direction: column;
   color: var(--clr-neutral-500);
+}
+.dashboard {
+  display: flex;
+  flex-direction: column; 
 }
 
 .control-select {
@@ -34,5 +38,25 @@
 
 .component-admin {
   display: flex;
+  flex-direction: column;
+  max-width: 20rem;
   gap: 2rem;
+}
+
+.form-auth {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-login, 
+.form-register {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.forms-login-register {
+  display: flex;
+  gap: 1rem;
 }
