@@ -9,7 +9,11 @@ export default function FilterTable({
     <div className="filterContainer">
       <label>
         Filter:
-        <select value={filterHeader} onChange={handleFilterHeader}>
+        <select
+          className="control-select"
+          value={filterHeader}
+          onChange={handleFilterHeader}
+        >
           <option value="">Choose a header</option>
           {headers.map((header) => (
             <option key={header} value={header}>
@@ -18,6 +22,7 @@ export default function FilterTable({
           ))}
         </select>
         <input
+          className="control-select"
           type="text"
           value={filterText}
           onChange={handleFilterText}

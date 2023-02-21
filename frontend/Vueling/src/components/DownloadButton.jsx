@@ -16,5 +16,9 @@ export default function DownloadButton({ headers, sortedRows }) {
     link.click();
     document.body.removeChild(link);
   };
-  return <button onClick={downloadCsv}>Download as CSV</button>;
+  return (
+    <button className="control-select downloadButton" onClick={downloadCsv}>
+      Download as CSV
+    </button>
+  );
 }

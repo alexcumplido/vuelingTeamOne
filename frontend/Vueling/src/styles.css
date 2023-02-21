@@ -24,16 +24,22 @@
 }
 .dashboard {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .control-select {
-    --fs-100: 0.75rem;
+  --fs-100: 0.75rem;
   font-size: var(--fs-100);
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.25rem;
   box-shadow: 0 1px 3px rgba(77, 71, 81, 0.2);
+}
+.control-select:hover {
+  background-color: #f9f9f9;
+}
+button:hover {
+  cursor: pointer;
 }
 
 .component-admin {
@@ -48,7 +54,7 @@
   flex-direction: column;
 }
 
-.form-login, 
+.form-login,
 .form-register {
   display: flex;
   flex-direction: column;
