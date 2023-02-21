@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using VY.Hackathon.TeamOne.WebApi.DataProvider.Entities;
 using VY.Hackathon.TeamOne.WebApi.DataProvider.EntityConfiguration;
 
 namespace VY.Hackathon.TeamOne.WebApi.DataProvider;
@@ -18,4 +19,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
         builder.ApplyConfiguration(new ResultSnapshotConfig());
     }
+
+    public virtual DbSet<ResultSnapshotEntity> ResultSnapshots { get; set; } = null!;
 }

@@ -4,9 +4,9 @@ using VY.Hackathon.TeamOne.WebApi.DataProvider.Entities;
 
 namespace VY.Hackathon.TeamOne.WebApi.DataProvider.EntityConfiguration;
 
-public class ResultSnapshotConfig : IEntityTypeConfiguration<ResultSnapshot>
+public class ResultSnapshotConfig : IEntityTypeConfiguration<ResultSnapshotEntity>
 {
-    public void Configure(EntityTypeBuilder<ResultSnapshot> builder)
+    public void Configure(EntityTypeBuilder<ResultSnapshotEntity> builder)
     {
         builder.HasKey(e => e.SnapshotId);
 

@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VY.Hackathon.TeamOne.WebApi.Auth;
 using VY.Hackathon.TeamOne.WebApi.DataProvider;
+using VY.Hackathon.TeamOne.WebApi.DataProvider.Repository;
 using VY.Hackathon.TeamOne.WebApi.Logging;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Contracts;
 using VY.Hackaton.TeamOne.ProviderData.Infrastructure.Impl;
@@ -11,6 +11,9 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
+    builder.Services.AddScoped<ApplicationDbContext>();
+    builder.Services.AddScoped<ResultSnapshotRepository>();
+
     builder.Host.UseLogzIoSerilog();
 
     builder.Services.AddControllers();
