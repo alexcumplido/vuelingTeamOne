@@ -7,7 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["VY.Hackathon.TeamOne.csproj", "VY.Hackathon.TeamOne/"]
+COPY ["VY.Hackathon.TeamOne.WebApi.csproj", "VY.Hackathon.TeamOne/"]
+COPY ["VY.Hackaton.Entities.csproj", "VY.Hackaton.Entities/"]
+COPY ["VY.Hackaton.TeamOne.ProviderData.Infrastructure.csproj", "VY.Hackaton.TeamOne.ProviderData.Infrastructure/"]
 RUN dotnet restore "VY.Hackathon.TeamOne/VY.Hackathon.TeamOne.csproj"
 WORKDIR "/src/VY.Hackathon.TeamOne"
 COPY . .
