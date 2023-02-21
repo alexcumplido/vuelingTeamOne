@@ -8,7 +8,7 @@ services:
       - "8000:80"
   
   dotnet:
-    build: ../backend/dotnet/.
+    build: ../backend/dotnet/VY.Hackathon.TeamOne/VY.Hackathon.TeamOne/.
     ports:
       - "8001:80"
     depends_on:
