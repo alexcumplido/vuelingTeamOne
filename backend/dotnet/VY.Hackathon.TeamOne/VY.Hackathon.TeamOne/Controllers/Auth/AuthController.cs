@@ -7,9 +7,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using VY.Hackathon.TeamOne.Auth;
-using VY.Hackathon.TeamOne.Auth.Models;
+using VY.Hackathon.TeamOne.Controllers.Auth.Models;
 
-namespace VY.Hackathon.TeamOne.Controllers;
+namespace VY.Hackathon.TeamOne.Controllers.Auth;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -24,8 +24,8 @@ public class AuthController : ControllerBase
         UserManager<IdentityUser> userManager,
         RoleManager<IdentityRole> roleManager)
     {
-        this._jwtBearerTokenSettings = jwtTokenOptions.Value;
-        this._userManager = userManager;
+        _jwtBearerTokenSettings = jwtTokenOptions.Value;
+        _userManager = userManager;
         _roleManager = roleManager;
     }
 
@@ -108,7 +108,6 @@ public class AuthController : ControllerBase
 
         return null;
     }
-
 
     private async Task<object> GenerateToken(IdentityUser identityUser)
     {
