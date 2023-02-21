@@ -11,10 +11,12 @@ function App() {
   const { data, isLoading = false } = useFetch(url);
 
   return (
-    <Wrapper>
-      <Table data={data} isLoading={isLoading} />
-      <Administrative />
-    </Wrapper>
+    <div className="dashboard">
+      <Wrapper>
+        <Table data={data} isLoading={isLoading} />
+        <Administrative />
+      </Wrapper>
+    </div>
   );
 }
 

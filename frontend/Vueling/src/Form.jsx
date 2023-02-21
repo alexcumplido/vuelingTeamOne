@@ -2,40 +2,27 @@ import { Select } from "./Select.jsx";
 import { useState} from "react";
 
 export function Form (){
-  const [PartTimeShiftDuration, setPartTimeShiftDuration] = useState("");
-  const [jardineria, setJardineria] = useState("");
-  const [equipaje, setEquipaje] = useState("");
-  const [coordination, setCoordination] = useState("");
-  const [jardineriaPartTime, setJardineriaPartTime] = useState("");
-  const [equipajePartTime, setEquipajePartTime] = useState("");
-  const [coordinationPartTime, setCoordinationPartTime] = useState("");
-  const [scheludeOpen, setScheludeOpen] = useState("");
-  const [scheludeClose, setScheludeClose] = useState("");
+  const [fullJardinera, setFullJardinera] = useState("");
+  const [partJardinera, setPartJardinera] = useState("");
+  const [fullEquipaje, setFullEquipaje] = useState("");
+  const [partEquipaje, setPartEquipaje] = useState("");
+  const [fullCoordinacion, setFullCoordinacion] = useState("");
+  const [partCoordinacion, setPartCoordinacion] = useState("");
+  const [day, setDay] = useState("");
   
- 
   async function fetchData(){
     try{
         const response = await fetch('fetchData', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              "PartTimeShiftDuration": PartTimeShiftDuration,
-              "HandlingFunctionHourPrice": {
-                  "FullTime": {
-                      "Jardineria": jardineria,
-                      "Equipaje": equipaje,
-                      "Coordination": coordination
-                  },
-                  "PartTime": {
-                      "Jardineria": jardineriaPartTime,
-                      "Equipaje": equipajePartTime,
-                      "Coordination": coordinationPartTime
-                  }
-              },
-              "AirportSchedule": {
-                  "Open": scheludeOpen,
-                  "Close": scheludeClose
-              }
+              "full_time_wage_jardinera": fullJardinera,
+              "part_time_wage_jardinera": partJardinera,
+              "full_time_wage_equipaje": fullEquipaje,
+              "part_time_wage_equipaje": partEquipaje,
+              "full_time_wage_coordinacion": fullCoordinacion,
+              "part_time_wage_coordinacion": partCoordinacion,
+              "day": day,
           })
         })
     } catch(err){
@@ -51,118 +38,93 @@ export function Form (){
   return (
     <section className="search container-standard">
       <form className="form">
-        <label className={"control-label"} htmlFor={"PartTimeShiftDuration"}>
-          {"Part TimeShift Duration"}
-          <input
-            className={"control-select"}
-            type={"PartTimeShiftDuration"}
-            id={"PartTimeShiftDuration"}
-            name={"PartTimeShiftDuration"}
-            onChange={(event) => setPartTimeShiftDuration(event.target.value)}
-            value={PartTimeShiftDuration}
-            placeholder={"Part Time Shift Duration Input"}
-          />
-        </label>
-        <label className={"control-label"} tmlFor={"jardineria"}>
-          {"Jardineria"}
+        <label className={"control-label"} htmlFor={"full_time_wage_jardinera"}>
+          {"full_time_wage_jardinera"}
           <input
             className={"control-select"}
             type={"number"}
-            id={"jardineria"}
-            name={"jardineria"}
-            onChange={(event) => setJardineria(event.target.value)}
-            value={jardineria}
-            placeholder={"Jardineria Input"}
+            id={"full_time_wage_jardinera"}
+            name={"full_time_wage_jardinera"}
+            onChange={(event) => setFullJardinera(event.target.value)}
+            value={fullJardinera}
+            placeholder={"full_time_wage_jardinera"}
+          />
+        </label>
+        <label className={"control-label"} htmlFor={"part_time_wage_jardinera"}>
+          {"part_time_wage_jardinera"}
+          <input
+            className={"control-select"}
+            type={"number"}
+            id={"part_time_wage_jardinera"}
+            name={"part_time_wage_jardinera"}
+            onChange={(event) => setPartJardinera(event.target.value)}
+            value={partJardinera}
+            placeholder={"part_time_wage_jardinera"}
           />
         </label>
 
-        <label className={"control-label"} htmlFor={"equipaje"}>
-          {"equipaje"}
+        <label className={"control-label"} htmlFor={"full_time_wage_equipaje"}>
+          {"full_time_wage_equipaje"}
           <input
             className={"control-select"}
             type={"number"}
-            id={"equipaje"}
-            name={"equipaje"}
-            onChange={(event) => setEquipaje(event.target.value)}
-            value={equipaje}
-            placeholder={"Equipaje Input"}
+            id={"full_time_wage_equipaje"}
+            name={"full_time_wage_equipaje"}
+            onChange={(event) => setFullEquipaje(event.target.value)}
+            value={fullEquipaje}
+            placeholder={"full_time_wage_equipaje"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"coordination"}>
-          {"coordination"}
+        <label className={"control-label"} htmlFor={"part_time_wage_equipaje"}>
+          {"part_time_wage_equipaje"}
           <input
             className={"control-select"}
             type={"number"}
-            id={"coordination"}
-            name={"coordination"}
-            onChange={(event) => setCoordination(event.target.value)}
-            value={coordination}
-            placeholder={"Coordination Input"}
+            id={"part_time_wage_equipaje"}
+            name={"part_time_wage_equipaje"}
+            onChange={(event) => setPartEquipaje(event.target.value)}
+            value={partEquipaje}
+            placeholder={"part_time_wage_equipaje"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"jardineriaPartTime"}>
-          {"Jardineria Part Time"}
+        <label className={"control-label"} htmlFor={"full_time_wage_coordinacion"}>
+          {"full_time_wage_coordinacion"}
           <input
             className={"control-select"}
             type={"number"}
-            id={"jardineriaPartTime"}
-            name={"jardineriaPartTime"}
-            onChange={(event) => setJardineriaPartTime(event.target.value)}
-            value={jardineriaPartTime}
-            placeholder={"Jardineria Part Time Input"}
+            id={"full_time_wage_coordinacion"}
+            name={"full_time_wage_coordinacion"}
+            onChange={(event) => setFullCoordinacion(event.target.value)}
+            value={fullCoordinacion}
+            placeholder={"full_time_wage_coordinacion"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"equipajePartTime"}>
-          {"Equipaje Part Time"}
+        <label className={"control-label"} htmlFor={"part_time_wage_coordinacion"}>
+          {"part_time_wage_coordinacion"}
           <input
             className={"control-select"}
             type={"number"}
-            id={"equipajePartTime"}
-            name={"equipajePartTime"}
-            onChange={(event) => setEquipajePartTime(event.target.value)}
-            value={equipajePartTime}
-            placeholder={"Equipaje Part Time input"}
+            id={"part_time_wage_coordinacion"}
+            name={"part_time_wage_coordinacion"}
+            onChange={(event) => setPartCoordinacion(event.target.value)}
+            value={partCoordinacion}
+            placeholder={"part_time_wage_coordinacion"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"coordinationPartTime"}>
-          {"Coordination Part Time"}
+        <label className={"control-label"} htmlFor={"day"}>
+          {"day"}
           <input
             className={"control-select"}
-            type={"number"}
-            id={"coordinationPartTime"}
-            name={"coordinationPartTime"}
-            onChange={(event) => setCoordinationPartTime(event.target.value)}
-            value={coordinationPartTime}
-            placeholder={"Coordination Part Time Input"}
-          />
-        </label>
-
-        <label className={"control-label"} htmlFor={"scheludeOpen"}>
-          {"Schelude Open"}
-          <input
-            className={"control-select"}
-            type='time' step="3600"
-            id={"scheludeOpen"}
-            name={"scheludeOpen"}
-            onChange={(event) => setScheludeOpen(event.target.value)}
-            value={scheludeOpen}
-            placeholder={"schelude Open Input"}
-          />
-        </label>
-
-        <label className={"control-label"} htmlFor={"scheludeClose"}>
-          {"Schelude Close"}
-          <input
-            className={"control-select"}
-            type='time' step="3600"
-            id={"scheludeClose"}
-            name={"scheludeClose"}
-            onChange={(event) => setScheludeClose(event.target.value)}
-            value={scheludeClose}
-            placeholder={"Schelude Close Input"}
+            type={"date"}
+            id={"day"}
+            name={"day"}
+            onChange={(event) => setDay(event.target.value)}
+            value={day}
+            placeholder={"day"}
           />
         </label>
         <button
+            className="control-select"
             disabled={false}
             onClick={submit}
           >
