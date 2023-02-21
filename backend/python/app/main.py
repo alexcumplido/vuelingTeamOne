@@ -62,7 +62,8 @@ def read_data(model: Model):
                                    full_time_wage_jardinera, part_time_wage_jardinera, full_time_wage_equipaje, part_time_wage_equipaje, full_time_wage_coordinacion,
                                     part_time_wage_coordinacion)
     
-    return {str(df_results)}
+
+    return df_results.to_json()
 
 def load_data_df(file_path):
     df = pd.read_csv(file_path, sep=';')
