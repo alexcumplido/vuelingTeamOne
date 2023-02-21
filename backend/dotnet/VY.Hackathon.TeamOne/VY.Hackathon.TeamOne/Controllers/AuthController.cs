@@ -8,8 +8,9 @@ using System.Security.Claims;
 using System.Text;
 using VY.Hackathon.TeamOne.WebApi.Auth;
 using VY.Hackathon.TeamOne.WebApi.Controllers.Auth.Models;
+using VY.Hackathon.TeamOne.WebApi.Models;
 
-namespace VY.Hackathon.TeamOne.WebApi.Controllers.Auth;
+namespace VY.Hackathon.TeamOne.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
