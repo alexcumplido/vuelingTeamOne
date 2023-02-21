@@ -25,4 +25,10 @@
     <ProjectReference Include="..\VY.Hackaton.TeamOne.ProviderData.Infrastructure\VY.Hackaton.TeamOne.ProviderData.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
