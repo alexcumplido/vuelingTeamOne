@@ -82,34 +82,58 @@ public class AuthController : ControllerBase
     [Route("Role/{role}")]
     public async Task<IActionResult> CreateRole(string role)
     {
-        if (string.IsNullOrWhiteSpace(role))
+        try
         {
-            return new BadRequestObjectResult(new { Message = "Role name required" });
-        }
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                _logger.LogWarning("Unable to create role with name empty");
 
-        if (!await _roleManager.RoleExistsAsync(role))
-        {
+                return new BadRequestObjectResult(new { Message = "Role name required" });
+            }
+
+            if (await _roleManager.RoleExistsAsync(role))
+            {
+                _logger.LogWarning("Role with name {role} already exists", role);
+
+                return BadRequest("Role already exists");
+            }
+
             await _roleManager.CreateAsync(new IdentityRole(role));
-        }
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Has been an error trying to create role {role}", role);
+            throw;
+        }
     }
 
     [HttpPost]
     [Route("Login")]
     public async Task<IActionResult> Login([FromBody] LoginCredentials? credentials)
     {
-        IdentityUser identityUser;
-
-        if (!ModelState.IsValid
-            || credentials == null
-            || (identityUser = await ValidateUser(credentials)) == null)
+        try
         {
-            return new BadRequestObjectResult(new { Message = "Login failed" });
-        }
+            IdentityUser identityUser;
 
-        var token = GenerateToken(identityUser);
-        return Ok(new { Token = token, Message = "Success" });
+            if (!ModelState.IsValid
+                || credentials == null
+                || (identityUser = await ValidateUser(credentials)) == null)
+            {
+                _logger.LogWarning("Credentials for user {user} are invalid.", credentials.Username);
+
+                return new BadRequestObjectResult(new { Message = "Login failed" });
+            }
+
+            var token = GenerateToken(identityUser);
+            return Ok(new { Token = token, Message = "Success" });
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Has been an error trying to login user {user}", credentials.Username);
+            throw;
+        }
     }
 
     private async Task<IdentityUser?> ValidateUser(LoginCredentials credentials)
