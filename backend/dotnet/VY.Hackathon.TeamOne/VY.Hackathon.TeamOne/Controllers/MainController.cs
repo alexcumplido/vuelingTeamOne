@@ -27,6 +27,7 @@ namespace VY.Hackathon.TeamOne.WebApi.Controllers
         [HttpPost]
         [Route("getData")]
         [Authorize(Roles = "Admin")]
+        [ProducesResponseType(typeof(ProviderDataResponse[]), 200)]
         public async Task<IActionResult> GetData([FromBody] ProviderDataRequest request)
         {
             try
