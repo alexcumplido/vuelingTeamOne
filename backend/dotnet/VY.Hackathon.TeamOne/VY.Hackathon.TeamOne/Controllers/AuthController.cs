@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Claims;
 using System.Text;
 using VY.Hackathon.TeamOne.WebApi.Auth;
@@ -36,6 +35,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("SignUp")]
+    [ProducesResponseType(typeof(SignupResponse), 200)]
     public async Task<IActionResult> SignUp([FromBody] SignUpInfo? signUpInfo)
     {
         try
@@ -70,7 +70,7 @@ public class AuthController : ControllerBase
                 }
             }
 
-            return Ok(new { Message = "User Registration Successful" });
+            return Ok(new SignupResponse { Message = "User Registration Successful" });
         }
         catch (Exception e)
         {
