@@ -13,7 +13,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureAuth(builder.Configuration);
 
-builder.Services.AddHttpClient<IProviderDataService, ProviderDataService>();
+builder.Services.AddHttpClient<IProviderDataService, ProviderDataService>(client =>
+{
+    client.BaseAddress = new Uri("");
+});
 
 var app = builder.Build();
 
