@@ -1,7 +1,26 @@
 version: "3.9"
+
 services:
-  web:
-    build: ../python/.
+
+  python:
+    build: ../backend/python/.
     ports:
       - "8000:80"
   
+  dotnet:
+    build: ../backend/dotnet/.
+    ports:
+      - "8001:80"
+    depends_on:
+      - sqlserver
+    
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "YourSTRONG!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./sqlserver:/var/opt/mssql
+    
