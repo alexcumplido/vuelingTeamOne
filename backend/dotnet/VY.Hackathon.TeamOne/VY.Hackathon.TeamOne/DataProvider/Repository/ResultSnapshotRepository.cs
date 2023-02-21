@@ -14,7 +14,7 @@ namespace VY.Hackathon.TeamOne.WebApi.DataProvider.Repository
 
         public async Task<ResultSnapshotEntity?> GetLatestAsync()
         {
-            return await _dbContext.ResultSnapshots
+            return await _dbContext.ResultSnapshot
                 .OrderByDescending(e => e.SnapshotDateTime)
                 .FirstOrDefaultAsync();
         }

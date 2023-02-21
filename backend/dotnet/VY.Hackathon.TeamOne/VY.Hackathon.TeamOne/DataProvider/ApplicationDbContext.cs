@@ -20,5 +20,5 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         builder.ApplyConfiguration(new ResultSnapshotConfig());
     }
 
-    public virtual DbSet<ResultSnapshotEntity> ResultSnapshots { get; set; } = null!;
+    public virtual DbSet<ResultSnapshotEntity> ResultSnapshot { get; set; } = null!;
 }
