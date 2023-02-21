@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 import pandas as pd
 import numpy as np
+import os
 from pulp import *
 
 COLUMN_NAMES = ['Day','Hour','Required employees']
@@ -28,8 +29,6 @@ def read_data(model: Model):
 
     sdir = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
     file_path_raw = os.path.join(sdir,'app', 'data', 'input-ground-handling-optimizer.csv')
-    file_path_input = os.path.join(sdir, 'data', 'input-data.csv')
-    file_path_json = os.path.join(sdir, 'data', 'input-data.json')
 
     #clean data
     print('Cleaning data')
@@ -216,11 +215,6 @@ def optimization(df_input, day, full_time_wage_jardinera, part_time_wage_jardine
 
 def construct_results(df_input, num_workers_jardinera, num_workers_equipaje, num_workers_coordinacion, df_matrix_shifts, number_shifts, number_windows, total_number_windows, full_time_wage_jardinera, part_time_wage_jardinera, full_time_wage_equipaje, part_time_wage_equipaje, full_time_wage_coordinacion,
                       part_time_wage_coordinacion):
-
-    for shift in range(number_shifts):
-        print(
-            f"The number of workers needed for shift {shift} is {int(num_workers_jardinera[shift].value())} workers"
-        )
 
     df_output = df_input
     df_output['Full-time Employees'] = 0
