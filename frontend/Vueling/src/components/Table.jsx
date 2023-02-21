@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./table.css";
 import datatable from "../../output.json";
 import DownloadButton from "./DownloadButton";
-// import XLSX from "xlsx"; // Import XLSX library
 import FilterTable from "./FilterTable";
 
-export default function Table() {
+// export default function Table({ data, isLoading }) {
+export default function Table(isLoading = false) {
   const [data, setData] = useState(datatable);
   const [sortKey, setSortKey] = useState(null);
   const [sortOrder, setSortOrder] = useState(1);
@@ -60,41 +60,54 @@ export default function Table() {
 
   return (
     <>
-      <div className="buttonFilterContainer">
-        <div>
-          <FilterTable
-            filterHeader={filterHeader}
-            filterText={filterText}
-            handleFilterHeader={handleFilterHeader}
-            headers={headers}
-            handleFilterText={handleFilterText}
-          />
+      {isLoading === true ? (
+        <div className="loaderContainer">
+          <span className="loader"></span>
         </div>
-        <DownloadButton headers={headers} sortedRows={sortedRows} />
-      </div>
+      ) : (
+        <div className="tableContainer">
+          <div className="buttonFilterContainer">
+            <div>
+              <FilterTable
+                filterHeader={filterHeader}
+                filterText={filterText}
+                handleFilterHeader={handleFilterHeader}
+                headers={headers}
+                handleFilterText={handleFilterText}
+              />
+            </div>
+            <DownloadButton headers={headers} sortedRows={sortedRows} />
+          </div>
 
-      <table>
-        <thead>
-          <tr>
-            {headers.map((header) => (
-              <th key={header} onClick={() => handleSort(header)}>
-                {header}
-                {sortKey === header && sortOrder === 1 && " ▲"}
-                {sortKey === header && sortOrder === -1 && " ▼"}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedRows.map((row, index) => (
-            <tr key={index}>
-              {headers.map((header) => (
-                <td key={header}>{row[header]}</td>
+          <table>
+            <thead>
+              <tr>
+                {headers.map((header) => (
+                  <th key={header} onClick={() => handleSort(header)}>
+                    {header}
+                    {sortKey === header && sortOrder === 1 && " ▲"}
+                    {sortKey === header && sortOrder === -1 && " ▼"}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sortedRows.map((row, index) => (
+                <tr key={index}>
+                  {headers.map((header) => (
+                    <td
+                      key={header}
+                      className={header === "Day" ? "columnFixedWidth" : ""}
+                    >
+                      {row[header]}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      )}
     </>
   );
 }
