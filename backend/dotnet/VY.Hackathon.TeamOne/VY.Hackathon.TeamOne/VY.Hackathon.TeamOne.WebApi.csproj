@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Parameters\Models\" />
-    <Folder Include="DataProvider\Entities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\VY.Hackaton.TeamOne.ProviderData.Infrastructure\VY.Hackaton.TeamOne.ProviderData.Infrastructure.csproj" />
   </ItemGroup>
 
