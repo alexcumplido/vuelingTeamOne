@@ -22,7 +22,7 @@ services:
     ports:
       - "1433:1433"
     volumes:
-      - ./db:/var/opt/mssql
+      - sqlserver:/var/opt/mssql
       
   react:
     build: ../frontend/Vueling/.
