@@ -6,7 +6,9 @@ from pydantic import BaseModel
 import pandas as pd
 import numpy as np
 from pulp import *
-from constants import COLUMN_NAMES, COLUMN_NAMES_INPUT
+
+COLUMN_NAMES = ['Day','Hour','Required employees']
+COLUMN_NAMES_INPUT = ['Day','Hour','Handling function','Required employees']
 
 app = FastAPI()
 
@@ -25,7 +27,7 @@ class Model(BaseModel):
 def read_data(model: Model):
 
     sdir = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
-    file_path_raw = os.path.join(sdir, 'data', 'input-ground-handling-optimizer.csv')
+    file_path_raw = os.path.join(sdir,'app', 'data', 'input-ground-handling-optimizer.csv')
     file_path_input = os.path.join(sdir, 'data', 'input-data.csv')
     file_path_json = os.path.join(sdir, 'data', 'input-data.json')
 
@@ -53,7 +55,8 @@ def read_data(model: Model):
     #run model
     num_workers = optimization(df_input, day, full_time_wage_jardinera, part_time_wage_jardinera,
                                full_time_wage_equipaje, part_time_wage_equipaje, full_time_wage_coordinacion,
-                               part_time_wage_coordinacion, df_matrix_shifts)
+                               part_time_wage_coordinacion, df_matrix_shifts,
+                               number_shifts, total_number_windows, number_windows)
 
     #construct final dataframe
     df_results = construct_results(df_input, num_workers[0], num_workers[1], num_workers[2], df_matrix_shifts, number_shifts, number_windows, total_number_windows,
@@ -65,6 +68,7 @@ def read_data(model: Model):
 def load_data_df(file_path):
     df = pd.read_csv(file_path, sep=';')
     return df
+
 
 def process_input(df_raw):
 
@@ -144,6 +148,7 @@ def process_input(df_raw):
 
     return df_final_input
 
+
 def construct_matrix():
     zero_data = np.zeros(shape=(18, 17))
     df_matrix_shifts = pd.DataFrame(zero_data)
@@ -175,8 +180,10 @@ def construct_matrix():
 
     return df_matrix_shifts
 
+
 def optimization(df_input, day, full_time_wage_jardinera, part_time_wage_jardinera, full_time_wage_equipaje,
-                 part_time_wage_equipaje, full_time_wage_coordinacion, part_time_wage_coordinacion, df_matrix_shifts):
+                 part_time_wage_equipaje, full_time_wage_coordinacion, part_time_wage_coordinacion, df_matrix_shifts,
+                 number_shifts, total_number_windows, number_windows):
 
     df_input = df_input[df_input['Day'] == day].reset_index(drop=True)
 
@@ -250,4 +257,3 @@ def construct_results(df_input, num_workers_jardinera, num_workers_equipaje, num
     df_output['Total cost'] = df_output['Full-time Employees cost'] + df_output['Part-time Employees cost']
 
     return df_output
-
