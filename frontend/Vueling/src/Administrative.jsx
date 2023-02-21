@@ -2,7 +2,7 @@ import { Form } from "./Form.jsx"
 import { useState } from "react";
 
 export function Administrative (){
-    const [auth, setAut] = useState(false);
+    const [auth, setAut] = useState(true);
     const [usernameLogin, setUserNameLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
     const handleUserNameLogin = (e) => setUserNameLogin(e.target.value);
