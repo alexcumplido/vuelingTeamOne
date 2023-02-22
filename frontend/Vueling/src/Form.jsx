@@ -132,6 +132,8 @@ export function Form() {
             name={"day"}
             onChange={(event) => setDay(event.target.value)}
             value={day}
+            min={"2023-02-01"}
+            max={"2023-02-07"}
           />
         </label>
         <button className="control-select" disabled={false} onClick={submit}>
