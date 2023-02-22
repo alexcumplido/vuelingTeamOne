@@ -7,7 +7,8 @@ export function Administrative() {
   const [passwordLogin, setPasswordLogin] = useState("");
   const handleUserNameLogin = (e) => setUserNameLogin(e.target.value);
   const handlePasswordLogin = (e) => setPasswordLogin(e.target.value);
-
+  const [radioRole, setRadioRole] = useState("Admin");
+  const handleRadio = (e) => setRadioRole(e.target.value);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -45,13 +46,14 @@ export function Administrative() {
   }
   async function signupUser() {
     try {
+      console.log(radioRole, "radio");
       const response = await fetch("http://localhost:8001/api/Auth/SignUp", {
         method: "POST",
         body: JSON.stringify({
           userName: formData.username,
           password: formData.password,
           email: formData.email,
-          roles: [formData.role],
+          roles: [radioRole],
         }),
         headers: {
           "Content-Type": "application/json",
@@ -161,16 +163,30 @@ export function Administrative() {
                 onChange={handleInputChange}
               />
             </label>
-            <label className="control-label">
-              Role:
+
+            <label htmlFor="admin" className="control-label">
+              Admin role:
               <input
-                className="control-select"
-                type="text"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
+                type="radio"
+                name="radioRole"
+                value="Admin"
+                id="admin"
+                checked={radioRole === "Admin"}
+                onChange={handleRadio}
               />
             </label>
+            <label htmlFor="user" className="control-label">
+              User role:
+              <input
+                type="radio"
+                name="radioRole"
+                value="User"
+                id="user"
+                checked={radioRole === "User"}
+                onChange={handleRadio}
+              />
+            </label>
+
             <button type="submit" className="control-select">
               Register
             </button>
