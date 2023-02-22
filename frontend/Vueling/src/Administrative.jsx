@@ -2,7 +2,7 @@ import { Form } from "./Form.jsx";
 import { useState } from "react";
 
 export function Administrative() {
-  const [auth, setAut] = useState(true);
+  const [auth, setAut] = useState(false);
   const [usernameLogin, setUserNameLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
   const handleUserNameLogin = (e) => setUserNameLogin(e.target.value);
@@ -84,9 +84,8 @@ export function Administrative() {
         <>
           <Form />
           <button
-            className="control-select"
+            className="control-select btn-logout"
             onClick={() => {
-              window.localStorage.removeItem("currentUser");
               setAut(false);
             }}
           >
@@ -94,18 +93,16 @@ export function Administrative() {
           </button>
         </>
       ) : (
-        <p className="control-label">
-          Dear user, please login to select params
-        </p>
+        <section className="fake-section">
+         <p>Dear user, login to query data.</p>
+        </section>
       )}
       {!auth && (
         <section className="forms-login-register">
           <form className="form-login" onSubmit={handleSubmitLogin}>
-            <p className="control-label">Login</p>
-            <div>
+            <p className="control-label">Login user</p>
               <label className="control-label" htmlFor="username">
                 Username:
-              </label>
               <input
                 className="control-select"
                 type="text"
@@ -114,11 +111,9 @@ export function Administrative() {
                 onChange={handleUserNameLogin}
                 required
               />
-            </div>
-            <div>
+             </label>
               <label className="control-label" htmlFor="password">
                 Password:
-              </label>
               <input
                 className="control-select"
                 type="password"
@@ -127,13 +122,13 @@ export function Administrative() {
                 onChange={handlePasswordLogin}
                 required
               />
-            </div>
+              </label>
             <button type="submit" className="control-select">
               Log In
             </button>
           </form>
           <form className="form-register" onSubmit={handleSubmitSignup}>
-            <p className="control-label">Register</p>
+            <p className="control-label">Register new user</p>
             <label className="control-label">
               Username:
               <input

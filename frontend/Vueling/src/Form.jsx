@@ -59,7 +59,6 @@ export function Form() {
             name={"full_time_wage_jardinera"}
             onChange={(event) => setFullJardinera(event.target.value)}
             value={fullJardinera}
-            placeholder={"Full time wage jardinera"}
           />
         </label>
         <label className={"control-label"} htmlFor={"part_time_wage_jardinera"}>
@@ -71,7 +70,6 @@ export function Form() {
             name={"part_time_wage_jardinera"}
             onChange={(event) => setPartJardinera(event.target.value)}
             value={partJardinera}
-            placeholder={"Part time wage jardinera"}
           />
         </label>
 
@@ -84,7 +82,6 @@ export function Form() {
             name={"full_time_wage_equipaje"}
             onChange={(event) => setFullEquipaje(event.target.value)}
             value={fullEquipaje}
-            placeholder={"Full time wage equipaje"}
           />
         </label>
         <label className={"control-label"} htmlFor={"part_time_wage_equipaje"}>
@@ -96,7 +93,6 @@ export function Form() {
             name={"part_time_wage_equipaje"}
             onChange={(event) => setPartEquipaje(event.target.value)}
             value={partEquipaje}
-            placeholder={"Part time wage equipaje"}
           />
         </label>
         <label
@@ -111,7 +107,6 @@ export function Form() {
             name={"full_time_wage_coordinacion"}
             onChange={(event) => setFullCoordinacion(event.target.value)}
             value={fullCoordinacion}
-            placeholder={"Full time wage coordinacion"}
           />
         </label>
         <label
@@ -126,7 +121,6 @@ export function Form() {
             name={"part_time_wage_coordinacion"}
             onChange={(event) => setPartCoordinacion(event.target.value)}
             value={partCoordinacion}
-            placeholder={"Part time wage coordinacion"}
           />
         </label>
         <label className={"control-label"} htmlFor={"day"}>
@@ -138,11 +132,10 @@ export function Form() {
             name={"day"}
             onChange={(event) => setDay(event.target.value)}
             value={day}
-            placeholder={"Day"}
           />
         </label>
         <button className="control-select" disabled={false} onClick={submit}>
-          Submit
+          Query new data
         </button>
       </form>
     </section>

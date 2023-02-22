@@ -8,7 +8,6 @@ export default function FilterTable({
   return (
     <div className="filterContainer">
       <label>
-        Filter:
         <select value={filterHeader} onChange={handleFilterHeader}>
           <option value="">Choose a header</option>
           {headers.map((header) => (

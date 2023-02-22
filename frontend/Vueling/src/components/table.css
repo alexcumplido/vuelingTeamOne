@@ -13,13 +13,14 @@ nav {
   margin-bottom: 2rem;
 }
 .appContainer {
-  max-width: 1000px;
-  margin-left: 50px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 h1 {
   color: white;
   margin-left: 50px;
 }
+
 .tableContainer {
 }
 
@@ -28,11 +29,54 @@ h1 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  background-color: #fbd859;
+  border-radius: 0.5rem;
+  padding: 1rem;
+ 
+}
+
+.buttonFilterContainer button{
+    font-size: 1.125rem;
+    min-height: 3.125rem;
+    border-radius: 3.125rem;
+    background-color: #4d4d4d;
+    border-color: #4d4d4d;
+    padding-left: 1.25rem;
+    padding-right: 1.875rem;
+    color: #fff;
+    border: none;
+}
+
+.buttonFilterContainer button:hover {
+    border: 1px solid #4d4d4d;
+    color: #4d4d4d;
+    background-color: #fbd859;
+    transition: all 0.15s ease-in;
+    cursor: pointer;
 }
 
 .filterContainer select {
   padding: 6px;
+  border: none;
   border-radius: 5px;
+}
+
+.filterContainer input {
+  padding: 0.35rem;
+  border-radius: 5px;
+  border: none;
+  margin: 0 1rem;
+}
+
+table thead tr th:first-of-type {
+  border-top-left-radius: 0.30rem;
+  border-bottom-left-radius: 0.30rem;
+  border-left: 0.1rem solid #fbd859;
+}
+table thead tr th:last-of-type {
+  border-top-right-radius: 0.30rem;
+  border-bottom-right-radius: 0.30rem;
+  border-right: 0.1rem solid #fbd859;
 }
 
 th {
