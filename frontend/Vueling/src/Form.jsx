@@ -1,7 +1,10 @@
 import { Select } from "./Select.jsx";
-import { useState} from "react";
+import { useContext, useState } from "react";
+import { DataTableContext } from "./DataTableContext.js";
 
-export function Form (){
+export function Form() {
+  const [data, setData] = useContext(DataTableContext);
+
   const [fullJardinera, setFullJardinera] = useState("");
   const [partJardinera, setPartJardinera] = useState("");
   const [fullEquipaje, setFullEquipaje] = useState("");
@@ -9,32 +12,41 @@ export function Form (){
   const [fullCoordinacion, setFullCoordinacion] = useState("");
   const [partCoordinacion, setPartCoordinacion] = useState("");
   const [day, setDay] = useState("");
-  
-  async function fetchData(){
-    try{
-        const response = await fetch('fetchData', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              "full_time_wage_jardinera": fullJardinera,
-              "part_time_wage_jardinera": partJardinera,
-              "full_time_wage_equipaje": fullEquipaje,
-              "part_time_wage_equipaje": partEquipaje,
-              "full_time_wage_coordinacion": fullCoordinacion,
-              "part_time_wage_coordinacion": partCoordinacion,
-              "day": day,
-          })
-        })
-    } catch(err){
-        console.log(err)
+
+  function transformToJson(input) {
+    const json = JSON.parse(input);
+    const output = JSON.stringify(json).replace(/\\/g, "");
+    return JSON.parse(output);
+  }
+
+  async function fetchData() {
+    try {
+      const response = await fetch("http://localhost:8000/getData", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_time_wage_jardinera: fullJardinera,
+          part_time_wage_jardinera: partJardinera,
+          full_time_wage_equipaje: fullEquipaje,
+          part_time_wage_equipaje: partEquipaje,
+          full_time_wage_coordinacion: fullCoordinacion,
+          part_time_wage_coordinacion: partCoordinacion,
+          day: day,
+        }),
+      });
+      const constData = await response.json();
+      setData(transformToJson(constData));
+      //console.log("constData:::", constData);
+    } catch (err) {
+      console.log(err);
     }
   }
 
- function submit(event) {
+  function submit(event) {
     event.preventDefault();
     fetchData();
   }
-  
+
   return (
     <section className="search container-standard">
       <form className="form">
@@ -87,7 +99,10 @@ export function Form (){
             placeholder={"Part time wage equipaje"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"full_time_wage_coordinacion"}>
+        <label
+          className={"control-label"}
+          htmlFor={"full_time_wage_coordinacion"}
+        >
           {"Full time wage coordinacion"}
           <input
             className={"control-select"}
@@ -99,7 +114,10 @@ export function Form (){
             placeholder={"Full time wage coordinacion"}
           />
         </label>
-        <label className={"control-label"} htmlFor={"part_time_wage_coordinacion"}>
+        <label
+          className={"control-label"}
+          htmlFor={"part_time_wage_coordinacion"}
+        >
           {"Part time wage coordinacion"}
           <input
             className={"control-select"}
@@ -123,15 +141,10 @@ export function Form (){
             placeholder={"Day"}
           />
         </label>
-        <button
-            className="control-select"
-            disabled={false}
-            onClick={submit}
-          >
-        Submit
+        <button className="control-select" disabled={false} onClick={submit}>
+          Submit
         </button>
       </form>
     </section>
-  )
+  );
 }
-

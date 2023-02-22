@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./table.css";
 import datatable from "../../output.json";
 import DownloadButton from "./DownloadButton";
 import FilterTable from "./FilterTable";
+import { DataTableContext } from "../DataTableContext";
 
-// export default function Table({ data, isLoading }) {
-export default function Table(isLoading = false) {
+export default function Table() {
+  const [dataContext, setDataContext] = useContext(DataTableContext);
   const [data, setData] = useState(datatable);
   const [sortKey, setSortKey] = useState(null);
   const [sortOrder, setSortOrder] = useState(1);
@@ -54,59 +55,57 @@ export default function Table(isLoading = false) {
           (a[sortKey] > b[sortKey] ? 1 : a[sortKey] < b[sortKey] ? -1 : 0)
       )
     : filteredRows;
+
   useEffect(() => {
-    setData(data);
-  }, [data]);
+    if (dataContext !== null) {
+      setData(dataContext);
+    }
+  }, [dataContext]);
+
   return (
     <>
-      {isLoading === true ? (
-        <div className="loaderContainer">
-          <span className="loader"></span>
-        </div>
-      ) : (
-        <div className="tableContainer">
-          <div className="buttonFilterContainer">
-            <div>
-              <FilterTable
-                filterHeader={filterHeader}
-                filterText={filterText}
-                handleFilterHeader={handleFilterHeader}
-                headers={headers}
-                handleFilterText={handleFilterText}
-              />
-            </div>
-            <DownloadButton headers={headers} sortedRows={sortedRows} />
+      <div className="tableContainer">
+        <div className="buttonFilterContainer">
+          <div>
+            <FilterTable
+              filterHeader={filterHeader}
+              filterText={filterText}
+              handleFilterHeader={handleFilterHeader}
+              headers={headers}
+              handleFilterText={handleFilterText}
+            />
           </div>
+          <DownloadButton headers={headers} sortedRows={sortedRows} />
+        </div>
 
-          <table>
-            <thead>
-              <tr>
+        <table>
+          <thead>
+            <tr>
+              {headers.map((header) => (
+                <th key={header} onClick={() => handleSort(header)}>
+                  {header}
+                  {sortKey === header && sortOrder === 1 && " ▲"}
+                  {sortKey === header && sortOrder === -1 && " ▼"}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sortedRows.map((row, index) => (
+              <tr key={index}>
                 {headers.map((header) => (
-                  <th key={header} onClick={() => handleSort(header)}>
-                    {header}
-                    {sortKey === header && sortOrder === 1 && " ▲"}
-                    {sortKey === header && sortOrder === -1 && " ▼"}
-                  </th>
+                  <td
+                    key={header}
+                    className={header === "Day" ? "columnFixedWidth" : ""}
+                  >
+                    {row[header]}
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {sortedRows.map((row, index) => (
-                <tr key={index}>
-                  {headers.map((header) => (
-                    <td
-                      key={header}
-                      className={header === "Day" ? "columnFixedWidth" : ""}
-                    >
-                      {row[header]}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
