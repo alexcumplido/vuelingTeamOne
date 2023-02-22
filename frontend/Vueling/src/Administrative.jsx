@@ -48,10 +48,10 @@ export function Administrative() {
       const response = await fetch("http://localhost:8001/api/Auth/SignUp", {
         method: "POST",
         body: JSON.stringify({
-          userName: username,
-          password: password,
-          email: email,
-          roles: [role],
+          userName: formData.username,
+          password: formData.password,
+          email: formData.email,
+          roles: [formData.role],
         }),
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,9 @@ export function Administrative() {
     }
   }
 
-  const handleSubmitSignup = async (event) => {
+  const handleSubmitSignup = (event) => {
+    console.log("event", event);
+
     event.preventDefault();
     signupUser();
   };
@@ -94,15 +96,15 @@ export function Administrative() {
         </>
       ) : (
         <section className="fake-section">
-         <p>Dear user, login to query data.</p>
+          <p>Dear user, login to query data.</p>
         </section>
       )}
       {!auth && (
         <section className="forms-login-register">
           <form className="form-login" onSubmit={handleSubmitLogin}>
             <p className="control-label">Login user</p>
-              <label className="control-label" htmlFor="username">
-                Username:
+            <label className="control-label" htmlFor="username">
+              Username:
               <input
                 className="control-select"
                 type="text"
@@ -111,9 +113,9 @@ export function Administrative() {
                 onChange={handleUserNameLogin}
                 required
               />
-             </label>
-              <label className="control-label" htmlFor="password">
-                Password:
+            </label>
+            <label className="control-label" htmlFor="password">
+              Password:
               <input
                 className="control-select"
                 type="password"
@@ -122,7 +124,7 @@ export function Administrative() {
                 onChange={handlePasswordLogin}
                 required
               />
-              </label>
+            </label>
             <button type="submit" className="control-select">
               Log In
             </button>
